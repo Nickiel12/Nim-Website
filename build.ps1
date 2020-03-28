@@ -1,0 +1,1 @@
+nim compile --run --outdir=./dist Main.nim

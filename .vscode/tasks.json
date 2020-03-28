@@ -7,29 +7,33 @@
             "label": "echo",
             "type": "shell",
             "command": "nim",
-            "options": {
-                "cwd": "${workspaceFolder}\\server\\dist"
-            },
             "args": [
                 "compile",
                 "--run",
                 "--outdir=\"${workspaceFolder}\\dist\"",
-                "\"${file}\""],
-            "group":{
+                "\"${file}\""
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "& build.ps1",
+            "group": {
                 "kind": "build",
                 "isDefault": true
             }
         },
         {
             "label": "build_current_file",
-            "type":"shell",
-            "command": "nim compile -d:release --outdir=\"${workspaceFolder}\\dist\\release\\\" \"${file}\"",
+            "type": "shell",
+            "command": "nim compile -d:release --outdir=\"${workspaceFolder}\\dist\\\" \"${file}\""
         },
         {
             "label": "build_server",
-            "type":"shell",
+            "type": "shell",
             "command": ".\\server\\build.ps1",
-            "group":{
+            "group": {
                 "kind": "test",
                 "isDefault": true
             }
