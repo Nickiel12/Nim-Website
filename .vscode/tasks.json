@@ -1,0 +1,38 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "echo",
+            "type": "shell",
+            "command": "nim",
+            "options": {
+                "cwd": "${workspaceFolder}\\server\\dist"
+            },
+            "args": [
+                "compile",
+                "--run",
+                "--outdir=\"${workspaceFolder}\\dist\"",
+                "\"${file}\""],
+            "group":{
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "build_current_file",
+            "type":"shell",
+            "command": "nim compile -d:release --outdir=\"${workspaceFolder}\\dist\\release\\\" \"${file}\"",
+        },
+        {
+            "label": "build_server",
+            "type":"shell",
+            "command": ".\\server\\build.ps1",
+            "group":{
+                "kind": "test",
+                "isDefault": true
+            }
+        }
+    ]
+}
