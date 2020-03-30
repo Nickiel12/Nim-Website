@@ -27,7 +27,8 @@ router myrouter:
   
     get "/ws-upload/@name":
         echo "connected"
-        discard existsOrCreateDir(@"name")
+        discard existsOrCreateDir("loaded_files/")
+        discard existsOrCreateDir("loaded_files/" & @"name")
         try:
             var wsconn = await newWebSocket(request)
             await wsconn.send("send the filename")
@@ -58,15 +59,15 @@ router myrouter:
             f.close()
         except:
             echo "websocket close: ", getCurrentExceptionMsg()
-        resp Http200, "file uploaded"
+        redirect "Success/" & @"name"
 
-    get "/hello/@name":
+    get "/Sucess/@name":
         var name: string = @"name"
         # This matches "/hello/fred" and "/hello/bob".
         # In the route ``@"name"`` will be either "fred" or "bob".
         # This can of course match any value which does not contain '/'.
         echo name
-        resp "hello " & name
+        resp "You're File Has Successfully Uploaded"
 
 proc main() =
     let port = parseInt("3000").Port

@@ -1,0 +1,12 @@
+#? stdtmpl | standard
+#proc success_page(content: string): string =
+#  result = ""
+<head>
+    <link rel="stylesheet", href="/styles/succss.css">    
+</head>
+<body>
+    <div>
+        <h1>File Successfully Uploaded</h1>
+        <a href="/audition/${content}">Click here to upload another</a>
+    </div>
+</body>
