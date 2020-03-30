@@ -2,6 +2,7 @@
 #proc home_page(content: string): string =
 #  result = ""
 <head>
+    <link rel="stylesheet", href="/styles/main.css">
     <script>
         function submit_file() {
             let ws = new WebSocket("ws://localhost:3000/ws-upload/${content}");
@@ -19,13 +20,18 @@
             return true;
         }
     </script>
+    
 </head>
 <body>
 
-    <form action="upload" method="post"enctype="multipart/form-data">
-        <label for="part-field"> Part: <label><br>
-        <input id="part-field" type="text" name="name-input"><br><br>
-        <input id="input-field" type="file" name="file" value="file"><br>
-        <input type="button" value="Submit" name="submit-button" onclick="submit_file()">
-</form>
+    <div id="spacer1"> 
+        <div id="spacer">
+            <form action="upload" method="post"enctype="multipart/form-data"id=main_form>
+                <label for="part-field"> Part: <label><br>
+                <input id="part-field" type="text" name="name-input"><br><br>
+                <input id="input-field" type="file" name="file" value="file"><br>
+                <input type="button" value="Submit" name="submit-button" onclick="submit_file()">
+            </form>
+        </div>
+    </div>
 </body>

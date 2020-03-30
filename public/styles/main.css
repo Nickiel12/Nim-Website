@@ -1,0 +1,21 @@
+body{
+    background-color: blueviolet;
+}
+
+#spacer1{
+    display: block;
+    text-align: center;
+}
+
+#spacer{
+    padding-left: 20%;
+    padding-right: 20%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+#main_form{
+    padding: 5%;
+    padding-right: 7%;
+    background-color: antiquewhite;
+}

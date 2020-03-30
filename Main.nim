@@ -22,7 +22,7 @@ onSignal(SIGINT):
 include "templates/Home.html"
 
 router myrouter:
-    get "/@name":
+    get "/audition/@name":
         resp(home_page(@"name"))
   
     get "/ws-upload/@name":
@@ -70,7 +70,7 @@ router myrouter:
 
 proc main() =
     let port = parseInt("3000").Port
-    let staticDir = joinPath(getCurrentDir(), "../public")
+    let staticDir = joinPath(getCurrentDir(), "/public")
     let settings = newSettings(port=port, staticDir=staticDir)
     var jester = initJester(myrouter, settings=settings)
     jester.serve()
