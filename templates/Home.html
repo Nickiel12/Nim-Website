@@ -1,0 +1,31 @@
+#? stdtmpl | standard
+#proc home_page(content: string): string =
+#  result = ""
+<head>
+    <script>
+        function submit_file() {
+            let ws = new WebSocket("ws://localhost:3000/ws-upload/${content}");
+            let filedom = document.querySelector("#input-field");
+            let partdom = document.querySelector("#part-field")
+            ws.onmessage = function(evnt) {
+                console.log(evnt.data);
+            }
+            ws.onopen = function(evnt) {
+                ws.send(filedom.files[0].name);
+                ws.send(partdom.value)
+                ws.send(filedom.files[0].slice());
+                ws.close();
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+
+    <form action="upload" method="post"enctype="multipart/form-data">
+        <label for="part-field"> Part: <label><br>
+        <input id="part-field" type="text" name="name-input"><br><br>
+        <input id="input-field" type="file" name="file" value="file"><br>
+        <input type="button" value="Submit" name="submit-button" onclick="submit_file()">
+</form>
+</body>

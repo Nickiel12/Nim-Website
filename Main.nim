@@ -3,9 +3,10 @@ import jester
 import os
 import posix
 import strutils
-import  htmlgen, asyncfile, asyncstreams, streams
+import asyncfile, asyncstreams
 import strutils
 import ws, ws/jester_extra
+import times
 
 onSignal(SIGABRT):
     ## Handle SIGABRT from systemd
@@ -18,41 +19,25 @@ onSignal(SIGINT):
     echo "<2>Recieved SIGINT"
     quit(1)
 
-include "templates/main.html"
+include "templates/Home.html"
 
 router myrouter:
-    get "/":
-        var html = """
-            <script>
-            function submit_file() {
-            let ws = new WebSocket("ws://localhost:3000/ws-upload");
-            let filedom = document.querySelector("#input-field");
-            ws.onmessage = function(evnt) {
-                console.log(evnt.data);
-            }
-            ws.onopen = function(evnt) {
-                ws.send(filedom.files[0].name);
-                ws.send(filedom.files[0].slice());
-                ws.close();
-            }
-            return true;
-            }
-            </script>
-        """
-        for file in walkFiles("*.*"):
-            html.add "<li>" & file & "</li>"
-        html.add "<form action=\"upload\" method=\"post\"enctype=\"multipart/form-data\">"
-        html.add "<input id=\"input-field\" type=\"file\" name=\"file\" value=\"file\">"
-        html.add "<input type=\"button\" value=\"Submit\" name=\"submit-button\" onclick=\"submit_file()\">"
-        html.add "</form>"
-        resp(html)
+    get "/@name":
+        resp(home_page(@"name"))
   
-    get "/ws-upload":
+    get "/ws-upload/@name":
+        echo "connected"
+        discard existsOrCreateDir(@"name")
         try:
             var wsconn = await newWebSocket(request)
             await wsconn.send("send the filename")
             var fname = await wsconn.receiveStrPacket()
-            var f = openAsync(fname, fmWrite)
+            let fileExt = splitFile(fname).ext
+            var part = await wsconn.receiveStrPacket()
+            
+            let fileName = "loaded_files/" & @"name" & "/" & part & " : " & format(getTime(), "d MMMM yyyy HH-mm") & fileExt
+            echo "Recieved, saving file to ", filename
+            var f = openAsync(fileName, fmWrite)
             while wsconn.readyState == Open:
                 let (op, seqbyte) = await wsconn.receivePacket()
                 if op != Binary:
