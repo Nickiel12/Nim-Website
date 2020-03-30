@@ -1,3 +1,8 @@
 body{
     background-color: chartreuse;
 }
+
+#spacer{
+    display: block;
+    text-align: center;
+}

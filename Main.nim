@@ -20,6 +20,7 @@ onSignal(SIGINT):
     quit(1)
 
 include "templates/Home.html"
+include "templates/success.html"
 
 router myrouter:
     get "/audition/@name":
@@ -36,7 +37,7 @@ router myrouter:
             let fileExt = splitFile(fname).ext
             var part = await wsconn.receiveStrPacket()
             
-            let fileName = "loaded_files/" & @"name" & "/" & part & " : " & format(getTime(), "d MMMM yyyy HH-mm") & fileExt
+            let fileName = "loaded_files/" & @"name" & "/" & part & " - " & format(getTime(), "d MMMM yyyy HH-mm") & fileExt
             echo "Recieved, saving file to ", filename
             var f = openAsync(fileName, fmWrite)
             while wsconn.readyState == Open:
@@ -59,15 +60,15 @@ router myrouter:
             f.close()
         except:
             echo "websocket close: ", getCurrentExceptionMsg()
-        redirect "Success/" & @"name"
+        redirect "success/" & @"name"
 
-    get "/Sucess/@name":
+    get "/success/@name":
         var name: string = @"name"
         # This matches "/hello/fred" and "/hello/bob".
         # In the route ``@"name"`` will be either "fred" or "bob".
         # This can of course match any value which does not contain '/'.
         echo name
-        resp "You're File Has Successfully Uploaded"
+        resp success_page(name)
 
 proc main() =
     let port = parseInt("3000").Port
