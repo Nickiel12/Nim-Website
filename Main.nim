@@ -39,8 +39,8 @@ router myrouter:
             let fileExt = splitFile(fname).ext
             var part = await wsconn.receiveStrPacket()
 
-            let fileName = "loaded_files/" & @"name" & "/" & part & " - " & format(getTime(), "d MMMM yyyy HH-mm") & fileExt
             echo "ding 1"
+            let fileName = "loaded_files/" & @"name" & "/" & part & " - " & format(getTime(), "d MMMM yyyy HH-mm") & fileExt
             echo "Recieved, saving file to ", filename
             var f = openAsync(fileName, fmWrite)
             echo "ding 2"
