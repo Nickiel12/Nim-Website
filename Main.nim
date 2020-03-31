@@ -28,8 +28,8 @@ router myrouter:
   
     get "/ws-upload/@name":
         echo "connected"
-        discard existsOrCreateDir("loaded_files/")
-        discard existsOrCreateDir("loaded_files/" & @"name")
+        discard existsOrCreateDir("~/Documents/auditions/")
+        discard existsOrCreateDir("~/Documents/auditions/" & @"name")
         try:
             var wsconn = await newWebSocket(request)
             await wsconn.send("send the filename")
