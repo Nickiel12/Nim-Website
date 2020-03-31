@@ -33,11 +33,15 @@ router myrouter:
         echo "Saving to file: ", absolutePath(joinPath("./../..","/Documents/auditions/" & @"name"))
         try:
             var wsconn = await newWebSocket(request)
+            echo "ding 1"
             await wsconn.send("send the filename")
+            echo "ding 2"
             var fname = await wsconn.receiveStrPacket()
             let fileExt = splitFile(fname).ext
             var part = await wsconn.receiveStrPacket()
             
+            echo "ding 3"
+
             let fileName = "loaded_files/" & @"name" & "/" & part & " - " & format(getTime(), "d MMMM yyyy HH-mm") & fileExt
             echo "Recieved, saving file to ", filename
             var f = openAsync(fileName, fmWrite)
