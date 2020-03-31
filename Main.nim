@@ -30,7 +30,7 @@ router myrouter:
         echo "connected"
         discard existsOrCreateDir("./../../Documents/auditions/")
         discard existsOrCreateDir("./../../Documents/auditions/" & @"name")
-        echo "Saving to file: ", joinPath("./../..","/Documents/auditions/" & @"name")
+        echo "Saving to file: ", absolutePath(joinPath("./../..","/Documents/auditions/" & @"name"))
         try:
             var wsconn = await newWebSocket(request)
             await wsconn.send("send the filename")
