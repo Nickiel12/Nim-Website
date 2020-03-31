@@ -27,10 +27,11 @@ router myrouter:
         resp(home_page(@"name"))
   
     get "/ws-upload/@name":
+        let name = @"name"
         echo "connected"
         discard existsOrCreateDir("./../../Documents/auditions/")
-        discard existsOrCreateDir("./../../Documents/auditions/" & @"name")
-        echo "Saving to file: ", absolutePath(joinPath("./../..","/Documents/auditions/" & @"name"))
+        discard existsOrCreateDir("./../../Documents/auditions/" & name)
+        echo "Saving to file: ", absolutePath(joinPath("./../..","/Documents/auditions/" & name))
         try:
             var wsconn = await newWebSocket(request)
             
@@ -42,9 +43,9 @@ router myrouter:
             echo "ding 1"
             echo fname
             echo fileExt
-            echo joinPath("./../../Documents/auditions/",@"name")
+            echo joinPath("./../../Documents/auditions/",name)
             echo (part & " - " & format(getTime(), "d MMMM yyyy HH-mm") & fileExt)
-            let fileName = joinPath("./../../Documents/auditions/",@"name", (part & " - " & format(getTime(), "d MMMM yyyy HH-mm") & fileExt))
+            let fileName = joinPath("./../../Documents/auditions/",name, (part & " - " & format(getTime(), "d MMMM yyyy HH-mm") & fileExt))
             echo "Recieved, saving file to ", filename
             var f = openAsync(fileName, fmWrite)
             echo "ding 2"
@@ -68,7 +69,7 @@ router myrouter:
             f.close()
         except:
             echo "websocket close: ", getCurrentExceptionMsg()
-        redirect "success/" & @"name"
+        redirect "success/" & name
 
     get "/success/@name":
         var name: string = @"name"
