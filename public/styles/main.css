@@ -5,6 +5,11 @@ body{
 #spacer1{
     display: block;
     text-align: center;
+    height: 33.33%;
+}
+
+#vert_spacer{
+    height: 33.33%;
 }
 
 #spacer{
@@ -16,6 +21,5 @@ body{
 
 #main_form{
     padding: 5%;
-    padding-right: 7%;
     background-color: antiquewhite;
 }
