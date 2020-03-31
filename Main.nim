@@ -40,6 +40,9 @@ router myrouter:
             var part = await wsconn.receiveStrPacket()
 
             echo "ding 1"
+            echo fname
+            echo fileExt
+            echo part
             let fileName = "loaded_files/" & @"name" & "/" & part & " - " & format(getTime(), "d MMMM yyyy HH-mm") & fileExt
             echo "Recieved, saving file to ", filename
             var f = openAsync(fileName, fmWrite)
