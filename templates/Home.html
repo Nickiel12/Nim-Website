@@ -5,7 +5,7 @@
     <link rel="stylesheet", href="/styles/main.css">
     <script>
         function submit_file() {
-            let ws = new WebSocket("ws://${domain}:3000/ws-upload/${content}");
+            let ws = new WebSocket("ws://" + window.location.hostname + ":3000/ws-upload/${content}");
             let filedom = document.querySelector("#input-field");
             let partdom = document.querySelector("#part-field")
             ws.onmessage = function(evnt) {
