@@ -17,6 +17,9 @@
                 ws.send(filedom.files[0].slice());
                 ws.close();
             }
+            ws.onclose = function(evnt) {
+                window.location = "http://" + window.location.hostname+":3000/success/${content}"
+            }
             return true;
         }
     </script>

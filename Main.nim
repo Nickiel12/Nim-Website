@@ -69,7 +69,7 @@ router myrouter:
             f.close()
         except:
             echo "websocket close: ", getCurrentExceptionMsg()
-        redirect "success/" & name
+        resp Http200
 
     get "/success/@name":
         var name: string = @"name"
