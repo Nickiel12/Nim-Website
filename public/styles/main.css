@@ -12,6 +12,10 @@ body{
     height: 33.33%;
 }
 
+label{
+    text-emphasis-color: black;
+}
+
 #spacer{
     padding-left: 20%;
     padding-right: 20%;

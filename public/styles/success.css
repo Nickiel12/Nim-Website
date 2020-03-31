@@ -1,5 +1,9 @@
 body{
-    background-color: chartreuse;
+    background-color: rgb(72, 141, 3);
+}
+
+h1{
+    text-emphasis-color: black;
 }
 
 #spacer{
