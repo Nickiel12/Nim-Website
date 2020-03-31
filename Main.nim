@@ -43,7 +43,7 @@ router myrouter:
             echo fname
             echo fileExt
             echo part
-            let fileName = "loaded_files/" & @"name" & "/" & part & " - " & format(getTime(), "d MMMM yyyy HH-mm") & fileExt
+            let fileName = joinPath("./../../Documents/auditions/",(@"name"), (part & " - " & format(getTime(), "d MMMM yyyy HH-mm") & fileExt))
             echo "Recieved, saving file to ", filename
             var f = openAsync(fileName, fmWrite)
             echo "ding 2"
