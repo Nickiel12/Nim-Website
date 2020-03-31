@@ -1,11 +1,11 @@
 #? stdtmpl | standard
-#proc home_page(content: string): string =
+#proc home_page(domain: string, content: string): string =
 #  result = ""
 <head>
     <link rel="stylesheet", href="/styles/main.css">
     <script>
         function submit_file() {
-            let ws = new WebSocket("ws://localhost:3000/ws-upload/${content}");
+            let ws = new WebSocket("ws://${domain}:3000/ws-upload/${content}");
             let filedom = document.querySelector("#input-field");
             let partdom = document.querySelector("#part-field")
             ws.onmessage = function(evnt) {
