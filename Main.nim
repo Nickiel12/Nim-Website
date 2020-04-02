@@ -1,4 +1,5 @@
 import asyncdispatch
+import assetFile
 import jester
 import os
 import posix
@@ -79,6 +80,12 @@ router myrouter:
         # This can of course match any value which does not contain '/'.
         echo name
         resp success_page(name)
+
+    get "/styles/main.css":
+        resp assetFile.getAsset("public/styles/main.css")
+
+    get "/styles/main.css":
+        resp assetFile.getAsset("public/styles/success.css")
 
 proc main() =
     let port = parseInt("80").Port
