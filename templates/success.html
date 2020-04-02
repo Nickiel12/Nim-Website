@@ -1,8 +1,8 @@
 #? stdtmpl | standard
 #import assets
 #
-#let css=assetsFile.getAsset("public/styles/success.css")
 #proc success_page(content: string): string =
+#let css=assets.getAsset("public/styles/success.css")
 #  result = ""
 <head> 
     <style type="text/css">
