@@ -1,8 +1,13 @@
 #? stdtmpl | standard
+#import assets
+#
+#let css=assetsFile.getAsset("public/styles/main.css")
 #proc home_page(content: string): string =
 #  result = ""
 <head>
-    <link rel="stylesheet", href="/styles/main.css">
+    <style type="text/css">
+        ${css}
+    </style>
     <script>
         function submit_file() {
             let ws = new WebSocket("ws://" + window.location.hostname + ":3000/ws-upload/${content}");

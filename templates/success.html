@@ -1,8 +1,13 @@
 #? stdtmpl | standard
+#import assets
+#
+#let css=assetsFile.getAsset("public/styles/success.css")
 #proc success_page(content: string): string =
 #  result = ""
-<head>
-    <link rel="stylesheet", href="/styles/success.css">    
+<head> 
+    <style type="text/css">
+        ${css}
+    </style> 
 </head>
 <body>
     <div id=spacer>
