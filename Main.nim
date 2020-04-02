@@ -8,6 +8,7 @@ import strutils
 import ws, ws/jester_extra
 import times
 
+
 onSignal(SIGABRT):
     ## Handle SIGABRT from systemd
     # Lines printed to stdout will be received by systemd and logged
