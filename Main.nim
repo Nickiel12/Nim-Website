@@ -80,7 +80,7 @@ router myrouter:
         resp success_page(name)
 
 proc main() =
-    let port = parseInt("3000").Port
+    let port = parseInt("80").Port
     let staticDir = joinPath(getCurrentDir(), "/public")
     let settings = newSettings(port=port, staticDir=staticDir)
     var jester = initJester(myrouter, settings=settings)
