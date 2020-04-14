@@ -27,7 +27,7 @@
                 if (evnt.code == 1000){
                     window.location = "http://" + window.location.hostname+":3000/success/${content}"
                 }else {
-                    alert("There was a problem, please contact Nickiel12 with this information.\n" + evnt)
+                    alert("There was a problem, please contact Nickiel12 with this information.\n" + evnt.data)
                 }
             }
             return true;
