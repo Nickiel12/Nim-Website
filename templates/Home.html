@@ -25,7 +25,7 @@
             }
             ws.onclose = function(evnt) {
                 if (evnt.code == 1000){
-                    window.location = "http://" + window.location.hostname+":3000/success/${content}"
+                    window.location = "http://" + window.location.hostname+"/success/${content}"
                 }else {
                     alert("There was a problem, please contact Nickiel12 with this information.\n" + evnt.code)
                 }

@@ -56,11 +56,12 @@ router myrouter:
                 let (op, seqbyte) = await wsconn.receivePacket()
                 if op != Binary:
                     resp Http400, "invalid sent format"
-                    echo "recieved Binary"
+                    echo "recieved non-Binary"
                     wsconn.close()
                     return
                 var cnt = 0
                 if seqbyte.len < 4096:
+                    echo "less than"
                     await f.write seqbyte.join
                     continue
                 
@@ -68,8 +69,9 @@ router myrouter:
                     let datastr = seqbyte[cnt .. cnt+4095].join
                     cnt.inc 4096
                     await f.write(datastr)
-                
-            wsconn.close()
+
+                echo "closing"
+                wsconn.close()
             f.close()
         except:
             echo "websocket close: ", getCurrentExceptionMsg()

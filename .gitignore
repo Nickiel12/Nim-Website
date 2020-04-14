@@ -4,3 +4,5 @@ htmldocs/
 dist/
 *.exe
 **/scripts/*.js
+node_modules/*
+

@@ -1,0 +1,26 @@
+{
+  "name": "nim-website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "dependencies": {
+    "ejs": "^3.0.2",
+    "express": "^4.17.1",
+    "formidable": "^1.2.2",
+    "multer": "^1.4.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nickiel12/Nim-Website.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nickiel12/Nim-Website/issues"
+  },
+  "homepage": "https://github.com/Nickiel12/Nim-Website#readme"
+}
