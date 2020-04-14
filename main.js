@@ -35,7 +35,7 @@ var upload = multer({
 	storage: storage
 });	 
 
-app.get("/auditions/:userID", function(req, res){
+app.get("/audition/:userID", function(req, res){
 	res.render("Signup", {userID:req.params["userID"]})
 })
 	
