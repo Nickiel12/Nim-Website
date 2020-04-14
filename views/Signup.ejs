@@ -2,20 +2,28 @@
 <html> 
 
 <head> 
-	<title>FILE UPLOAD DEMO</title> 
+	<title>File Upload</title> 
+	<link ref="stylesheet" href="/styles/main.css" type="text/css">
 </head> 
 
 <body> 
-	<h1>Single File Upload Demo</h1> 
+    <div id=vert_spacer>
 
-	<form action="/uploadProfilePicture/<%=userID%>"
-	enctype="multipart/form-data" method="POST"> 
-	
-		<span>Upload Profile Picture:</span> 
-		<input type="file" name="mypic" required/> <br> 
-		<input type="text" name="part_name" required/> <br>
-		<input type="submit" value="submit"> 
-	</form> 
+    </div>
+    <div id="spacer1"> 
+        <div id="spacer">
+			<form action="/uploadProfilePicture/<%=userID%>" 
+				enctype="multipart/form-data" method="POST", id=main_form> 
+				<label for="part-field"> Part Name: </label> <br>
+				<input id="part-field" type="text" name="part_name" required/> <br>
+				<input type="file" name="mypic" required/> <br> 
+				<input type="submit" value="submit"> 
+			</form> 
+		</div>
+	</div>
+	<div id=vert_spacer>
+
+    </div>
 </body> 
 
 </html> 

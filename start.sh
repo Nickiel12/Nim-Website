@@ -1,2 +1,2 @@
 #! /bin/bash
-./Main
+nodemon main.js

@@ -1,36 +1,39 @@
 const express = require("express") 
 const path = require("path") 
 const multer = require("multer") 
+const bodyParser = require("body-parser")
+const fs = require("fs")
 const app = express() 
 	
 // View Engine Setup 
 app.set("views",path.join(__dirname,"views")) 
-app.set("view engine","ejs") 
-	
-// var upload = multer({ dest: "Upload_folder_name" }) 
-// If you do not want to use diskStorage then uncomment it 
+app.use(express.static(path.join(__dirname, "public")))
+app.set("view engine", "ejs") 
+
+app.use(bodyParser.json()); 
+app.use(bodyParser.urlencoded({
+	extended: true
+}))
 	
 var storage = multer.diskStorage({ 
 	destination: function (req, file, cb) { 
 
 		// Uploads is the Upload_folder_name 
-		cb(null, "uploads/"+req.params["userID"]) 
+		var output_path = "uploads/"+req.params["userID"]
+		console.log("checking if exists")
+		if (!fs.existsSync(output_path)){
+			fs.mkdirSync(output_path);
+		}
+		cb(null, output_path) 
 	}, 
 	filename: function (req, file, cb) { 
-	cb(null, file.fieldname + "-" + Date.now()+path.extname(file.originalname).toLowerCase()) 
+	cb(null, req.body["part_name"] + "-" + Date.now()+path.extname(file.originalname).toLowerCase()) 
 	} 
 }) 
 	
-// Define the maximum size for uploading 
-// picture i.e. 1 MB. it is optional 
-//const maxSize = 1 * 1000 * 1000; 
-	
 var upload = multer({ 
-	storage: storage//, 
-//  limits: { fileSize: maxSize }, 
-  
-// mypic is the name of file attribute 
-}).single("mypic");	 
+	storage: storage
+});	 
 
 app.get("/",function(req,res){ 
 	res.render("Signup"); 
@@ -40,26 +43,9 @@ app.get("/auditions/:userID", function(req, res){
 	res.render("Signup", {userID:req.params["userID"]})
 })
 	
-app.post("/uploadProfilePicture/:userID",function (req, res, next) { 
-	console.log(req)
-		
-	// Error MiddleWare for multer file upload, so if any 
-	// error occurs, the image would not be uploaded! 
-	upload(req,res,function(err) { 
-
-		if(err) { 
-
-			// ERROR occured (here it can be occured due 
-			// to uploading image of size greater than 
-			// 1MB or uploading different file type) 
-			res.send(err) 
-		} 
-		else { 
-
-			// SUCCESS, image successfully uploaded 
-			res.send("Success, Image uploaded!") 
-		} 
-	}) 
+app.post("/uploadProfilePicture/:userID", upload.single("mypic"),function (req, res, next) { 
+	console.log(req.body)
+	res.render("success", {userID:req.params["userID"]})
 }) 
 	
 // Take any port number of your choice which 
