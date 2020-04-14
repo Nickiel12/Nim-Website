@@ -52,6 +52,7 @@ router myrouter:
             var f = openAsync(fileName, fmWrite)
             echo "ding 2"
             while wsconn.readyState == Open:
+                echo "writing data"
                 let (op, seqbyte) = await wsconn.receivePacket()
                 if op != Binary:
                     resp Http400, "invalid sent format"
@@ -68,7 +69,7 @@ router myrouter:
                     cnt.inc 4096
                     await f.write(datastr)
                 
-                wsconn.close()
+            wsconn.close()
             f.close()
         except:
             echo "websocket close: ", getCurrentExceptionMsg()
