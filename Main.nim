@@ -55,6 +55,7 @@ router myrouter:
                 let (op, seqbyte) = await wsconn.receivePacket()
                 if op != Binary:
                     resp Http400, "invalid sent format"
+                    echo "recieved Binary"
                     wsconn.close()
                     return
                 var cnt = 0
