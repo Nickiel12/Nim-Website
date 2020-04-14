@@ -19,7 +19,7 @@ var storage = multer.diskStorage({
 	destination: function (req, file, cb) { 
 
 		// Uploads is the Upload_folder_name 
-		var output_path = path.join("uploads"+req.params["userID"])
+		var output_path = path.join("uploads", req.params["userID"])
 		console.log("checking if exists")
 		if (!fs.existsSync(output_path)){
 			fs.mkdirSync(output_path);
